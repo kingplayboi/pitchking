@@ -50,6 +50,21 @@ async function init() {
         await persist(k);
       }
     }
+    // starter items: products in the repo file are added once; removing one later sticks
+    const seededRow = await pool.query('SELECT value FROM shopbot_kv WHERE id = $1', [CLIENT + ':seeded']);
+    const seeded = seededRow.rows[0] ? seededRow.rows[0].value : [];
+    const starters = readFile('products.json') || [];
+    let added = false;
+    for (const p of starters) {
+      if (seeded.includes(p.id)) continue;
+      seeded.push(p.id);
+      if (!mem.products.some((x) => x.id === p.id)) mem.products.push(p);
+      added = true;
+    }
+    if (added) {
+      await persist('products');
+      await pool.query(UPSERT('shopbot_kv', 'value').replace('$2', '$2::jsonb'), [CLIENT + ':seeded', JSON.stringify(seeded)]);
+    }
     console.log(`Storage: Postgres (client ${CLIENT})`);
   } else {
     for (const k of Object.keys(KEYS)) mem[k] = readFile(KEYS[k]) || d[k];
@@ -73,9 +88,8 @@ async function getImage(name) {
   if (pool) {
     const r = await pool.query('SELECT data FROM shopbot_images WHERE id = $1', [`${CLIENT}:${name}`]);
     if (r.rows[0]) buf = r.rows[0].data;
-  } else if (fs.existsSync(file(name))) {
-    buf = fs.readFileSync(file(name));
   }
+  if (!buf && fs.existsSync(file(name))) buf = fs.readFileSync(file(name));
   if (buf) imgCache.set(name, buf);
   return buf;
 }

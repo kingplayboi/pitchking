@@ -2,3 +2,4 @@ node_modules
 auth
 clients/*/orders.json
 .env
+seed

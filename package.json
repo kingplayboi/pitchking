@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sim": "node src/simulator.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "seed": "node scripts/seed.js"
   },
   "keywords": [],
   "author": "",
