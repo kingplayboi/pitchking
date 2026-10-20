@@ -1,0 +1,11 @@
+{
+  "name": "My Shop",
+  "ownerNumber": "254700000000",
+  "hours": "Mon-Sat 9am-7pm",
+  "payment": "Pay to Till 000000, then send the M-Pesa confirmation code here.",
+  "policy": "Exchanges within 3 days if unworn with tags.",
+  "areas": [
+    { "name": "Town centre", "fee": 150 },
+    { "name": "Pick up from shop", "fee": 0, "pickup": true }
+  ]
+}
