@@ -2,13 +2,40 @@
   "name": "ShopBot",
   "description": "WhatsApp shop assistant: catalogue, orders, owner alerts.",
   "repository": "https://github.com/kingplayboi/pitchking",
-  "keywords": ["whatsapp", "bot", "shop"],
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "shop"
+  ],
   "env": {
-    "SESSION_ID": { "description": "Get this from the ShopBot pairing site (starts with SHOPBOT~)", "required": true },
-    "OWNER_NUMBER": { "description": "Shop owner's WhatsApp number, e.g. 2547XXXXXXXX (no plus sign)", "required": true },
-    "CLIENT": { "description": "Leave as demo", "value": "demo" },
-    "SHOP_CONFIG": { "description": "Optional: shop name, hours, delivery areas as JSON", "required": false }
+    "SESSION_ID": {
+      "description": "Get this from the ShopBot pairing site (starts with SHOPBOT~)",
+      "required": true
+    },
+    "OWNER_NUMBER": {
+      "description": "Shop owner's WhatsApp number, e.g. 2547XXXXXXXX (no plus sign)",
+      "required": true
+    },
+    "CLIENT": {
+      "description": "Leave as demo",
+      "value": "demo"
+    },
+    "SHOP_CONFIG": {
+      "description": "Optional: shop name, hours, delivery areas as JSON",
+      "required": false
+    }
   },
-  "formation": { "worker": { "quantity": 1, "size": "eco" } },
-  "addons": ["heroku-postgresql"]
+  "formation": {
+    "web": {
+      "quantity": 0,
+      "size": "eco"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
