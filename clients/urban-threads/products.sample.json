@@ -1,0 +1,52 @@
+[
+  { "id": "m1", "category": "Men", "name": "Black Oversized Hoodie", "price": 1800, "image": "images/black-hoodie.jpg",
+    "variants": [
+      { "size": "M", "color": "Black", "stock": 4 },
+      { "size": "L", "color": "Black", "stock": 3 },
+      { "size": "XL", "color": "Black", "stock": 0 },
+      { "size": "L", "color": "Grey", "stock": 2 } ] },
+  { "id": "m2", "category": "Men", "name": "Slim Fit Blue Jeans", "price": 2200, "image": "images/slim-jeans.jpg",
+    "variants": [
+      { "size": "30", "color": "Blue", "stock": 3 },
+      { "size": "32", "color": "Blue", "stock": 5 },
+      { "size": "34", "color": "Blue", "stock": 2 } ] },
+  { "id": "m3", "category": "Men", "name": "Classic Polo Shirt", "price": 1200, "image": "images/polo.jpg",
+    "variants": [
+      { "size": "M", "color": "White", "stock": 6 },
+      { "size": "L", "color": "White", "stock": 4 },
+      { "size": "M", "color": "Navy", "stock": 1 },
+      { "size": "L", "color": "Navy", "stock": 5 } ] },
+  { "id": "w1", "category": "Women", "name": "Floral Summer Dress", "price": 2500, "image": "images/floral-dress.jpg",
+    "variants": [
+      { "size": "S", "color": "Floral", "stock": 2 },
+      { "size": "M", "color": "Floral", "stock": 4 },
+      { "size": "L", "color": "Floral", "stock": 3 } ] },
+  { "id": "w2", "category": "Women", "name": "High-Waist Mom Jeans", "price": 2400, "image": "images/mom-jeans.jpg",
+    "variants": [
+      { "size": "28", "color": "Light Blue", "stock": 3 },
+      { "size": "30", "color": "Light Blue", "stock": 4 },
+      { "size": "32", "color": "Light Blue", "stock": 2 } ] },
+  { "id": "w3", "category": "Women", "name": "Ribbed Crop Top", "price": 900, "image": "images/crop-top.jpg",
+    "variants": [
+      { "size": "S", "color": "Beige", "stock": 5 },
+      { "size": "M", "color": "Beige", "stock": 5 },
+      { "size": "S", "color": "Black", "stock": 3 },
+      { "size": "M", "color": "Black", "stock": 0 } ] },
+  { "id": "k1", "category": "Kids", "name": "Kids Cotton Tracksuit", "price": 1500, "image": "images/kids-tracksuit.jpg",
+    "variants": [
+      { "size": "4-5 yrs", "color": "Red", "stock": 3 },
+      { "size": "6-7 yrs", "color": "Red", "stock": 2 },
+      { "size": "6-7 yrs", "color": "Navy", "stock": 4 },
+      { "size": "8-9 yrs", "color": "Navy", "stock": 3 } ] },
+  { "id": "s1", "category": "Shoes", "name": "White Street Sneakers", "price": 3200, "image": "images/sneakers.jpg",
+    "variants": [
+      { "size": "40", "color": "White", "stock": 2 },
+      { "size": "41", "color": "White", "stock": 3 },
+      { "size": "42", "color": "White", "stock": 4 },
+      { "size": "43", "color": "White", "stock": 1 } ] },
+  { "id": "s2", "category": "Shoes", "name": "Leather Ankle Boots", "price": 4500, "image": "images/boots.jpg",
+    "variants": [
+      { "size": "38", "color": "Brown", "stock": 2 },
+      { "size": "39", "color": "Brown", "stock": 2 },
+      { "size": "40", "color": "Brown", "stock": 1 } ] }
+]

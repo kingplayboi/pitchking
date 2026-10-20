@@ -1,0 +1,14 @@
+{
+  "name": "Urban Threads",
+  "ownerNumber": "254116919490",
+  "hours": "Mon-Sat 9am-7pm",
+  "payment": "Pay to Till 123456 (Urban Threads), then send the M-Pesa confirmation code here.",
+  "policy": "Exchanges within 3 days if unworn with tags. No refunds on sale items.",
+  "areas": [
+    { "name": "Nairobi CBD", "fee": 150 },
+    { "name": "Westlands", "fee": 200 },
+    { "name": "Kasarani", "fee": 250 },
+    { "name": "Rongai", "fee": 300 },
+    { "name": "Pick up from shop", "fee": 0, "pickup": true }
+  ]
+}

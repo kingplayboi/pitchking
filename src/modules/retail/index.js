@@ -15,12 +15,26 @@ const looksLikeMpesa = (t) => {
   return /^[A-Z0-9]{10}$/.test(c) && /\d/.test(c) && /[A-Z]/.test(c);
 };
 
-const homeText = (shop) =>
+const homeTextBase = (shop) =>
   `Welcome to ${shop.name}! 👋\n\n1. Browse clothes\n2. Delivery & opening hours\n3. Exchange policy\n4. Talk to us\n\nReply with a number. Type CART anytime to see your cart.`;
+const homeText = (shop) => {
+  const cats = categories(store.getProducts());
+  const base = homeTextBase(shop);
+  return cats.length ? base + '\n\nNow in stock: ' + cats.join(', ') + '. Type ALL to see everything with prices.' : base;
+};
 const infoText = (shop) =>
   `🚚 Delivery fees:\n${shop.areas.map((a) => `• ${a.name}: ${a.fee ? kes(a.fee) : 'free'}`).join('\n')}\n\n🕘 Open: ${shop.hours}`;
-const catText = (cats) =>
+const catTextOld = (cats) =>
   `What are you shopping for?\n\n${cats.map((c, i) => `${i + 1}. ${c}`).join('\n')}\n\nReply with a number.`;
+const catText = (cats) => {
+  const list = store.getProducts().filter(inStock);
+  const rows = cats.map((c, i) => {
+    const items = list.filter((p) => p.category === c);
+    const from = Math.min(...items.map((p) => p.price));
+    return (i + 1) + '. ' + c + ' (' + items.length + (items.length === 1 ? ' item' : ' items') + ', from ' + kes(from) + ')';
+  });
+  return 'What are you shopping for?\n\n' + rows.join('\n') + '\n\nReply with a number.';
+};
 const itemText = (p) =>
   `*${p.name}*\n${kes(p.price)}\nAvailable: ${p.variants.filter((v) => v.stock > 0).map((v) => `${v.color} ${v.size}`).join(', ')}\n\nReply ADD to pick size/colour, NEXT or PREV to browse, BACK for categories.`;
 
@@ -229,6 +243,12 @@ async function handle(from, raw, send, media) {
 
   // global commands
   if (GREET.includes(t)) { s.state = 'home'; return say(homeText(shop)); }
+  if (['all', 'catalog', 'catalogue', 'prices'].includes(t)) {
+    const list = store.getProducts().filter(inStock);
+    if (!list.length) return say("We're updating our stock. Check back soon!");
+    const rows = categories(list).map((c) => '*' + c + '*\n' + list.filter((p) => p.category === c).map((p) => '• ' + p.name + ' — ' + kes(p.price)).join('\n'));
+    return say('🛍️ What we have:\n\n' + rows.join('\n\n') + '\n\nType MENU to start shopping, or CART to see your cart.');
+  }
   if (t === 'cart') return say(cartText(s));
   if (t === 'clear') { s.cart = []; s.state = 'home'; return say('Cart cleared. Type MENU to start again.'); }
   if (t === 'checkout') return startCheckout(c);
@@ -239,7 +259,12 @@ async function handle(from, raw, send, media) {
   switch (s.state) {
     case 'home':
       switch (t) {
-        case '1': s.state = 'categories'; return say(catText(categories(products)));
+        case '1': {
+          const cats = categories(products);
+          if (!cats.length) return say("We're updating our stock. Check back soon, or type 4 to talk to us.");
+          s.state = 'categories';
+          return say(catText(cats));
+        }
         case '2': return say(infoText(shop));
         case '3': return say(`Exchange policy:\n${shop.policy}`);
         case '4': return handoff(c, 'Customer asked to talk to you');
